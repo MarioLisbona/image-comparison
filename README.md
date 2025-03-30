@@ -7,33 +7,47 @@ Simple Python tool to compare images using perceptual hashing.
 1. Install required packages:
 
 ```bash
-pip install imagehash
-```
-
-2. Run the script:
-
-```bash
-python compare_image_hash.py <image1_path> <image2_path>
+pip install Pillow imagehash
 ```
 
 ## Usage
 
+Compare two images by providing their file paths:
+
 ```bash
-python compare_image_hash.py images/image1.jpg images/image2.jpg
+python compare_image_hash.py image1.jpg image2.jpg
 ```
 
-## Output
+## Hash Methods
 
-The script will output the hash difference between the two images.
+You can change the hashing algorithm by modifying the `hash_method` variable in the script:
 
-```bash
-Comparing:
-Image 1: image1.jpg
-Image 2: image2.jpg
-Hash difference: 10
+```python
+hash_method = "average_hash"  # Change this line to use different methods
+```
+
+Available hash methods:
+
+- `"average_hash"` (aHash) - Fast, but less accurate
+- `"perception_hash"` (pHash) - More robust to scaling/compression
+- `"difference_hash"` (dHash) - Good at detecting edges
+- `"wavelet_hash"` (wHash) - Good at detecting both color and edges
+
+## Example Output
+
+```
+Comparing Image Hashes:
+Hash Method: average_hash
+Image 1: photo1.jpg
+Hash 1: f0f0f0f0f0f0f0f0
+Image 2: photo2.jpg
+Hash 2: f0f0f0f0f0f0f0f8
+Hash difference: 1
+Similar: True
 ```
 
 ## Notes
 
-- The script uses the average hash method by default. You can change the hash method in the script.
-- The script assumes the images are in the `images` directory. You can change the directory in the script.
+- Hash difference of 0 means identical images
+- Higher numbers indicate more different images
+- Images are considered similar if difference < 10
