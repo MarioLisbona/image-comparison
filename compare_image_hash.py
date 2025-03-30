@@ -5,6 +5,11 @@ import os
 
 def compare_images(image_path1, image_path2):
     # Calculate hash for both images
+    # You can use different hash methods - need to test which one is best
+    # - average_hash (ah)
+    # - perception_hash (ph)
+    # - difference_hash (dh)
+    # - wavelet_hash (wh)
     with Image.open(image_path1) as img1, Image.open(image_path2) as img2:
         hash1 = imagehash.average_hash(img1)
         hash2 = imagehash.average_hash(img2)
@@ -16,7 +21,8 @@ def compare_images(image_path1, image_path2):
     print(f"Image 1: {os.path.basename(image_path1)}")
     print(f"Image 2: {os.path.basename(image_path2)}")
     print(f"Hash difference: {difference}")
-    print(f"Similar: {difference < 10}")  # Adjust threshold as needed
+    # Adjust threshold as needed
+    print(f"Similar: {difference < 10}")  
     
     return difference
 
